@@ -16,6 +16,7 @@ app.use(cors());
 
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/auth", authRoutes);
+
 app.get("/api/v1/test", async (req: Request, res: Response) => {
   res.json({
     message: "Welcome to the STUDENTS HOSTEL BOOKING APP API!!!",
