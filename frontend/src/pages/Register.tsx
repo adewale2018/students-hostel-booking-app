@@ -1,9 +1,12 @@
+import * as apiClient from "../api-clients";
+
 import EyeClose from "../assets/eyeOpen.svg";
 import EyeOpen from "../assets/eyeClose.svg";
 import { useForm } from "react-hook-form";
+import { useMutation } from 'react-query';
 import { useState } from "react";
 
-type FormValues = {
+export type FormValues = {
   firstName: string;
   lastName: string;
   email: string;
@@ -29,8 +32,15 @@ const Register = () => {
     watch,
   } = useForm<FormValues>();
 
+  const mutation  = useMutation(apiClient.register, {
+    onSuccess: (res) => {console.log("YOU have successfully registered...", res)},
+    onError: (error: Error) => {
+      // console.log(error.message)
+    },
+  });
+
   const handleFormSubmission = handleSubmit((data) => {
-    console.log("it works", data);
+    mutation.mutate(data);
   });
 
   return (
